@@ -29,32 +29,35 @@ def config_json(action_type,clash_link=CLASH_LINK,config_link='url'):
 
 # 获取配置文件 需要传入下载链接
 def down_file(f_type,link):
-	if f_type == "clash" : # 下载clash核心
-		clash_down = "wget {} -P /tmp/clash/".format(link)
-		os.system(clash_down)
-		for i in os.listdir('/tmp/clash/'):
-			if 'tar.gz' in i and 'clash' in i or 'Clash' in i:
-				str_temp = "tar zxf {} ".format("/tmp/clash/"+i) 
-				str_temp2 = "ls /tmp/clash | grep clash-linux | grep -v 'tar.gz' | xargs -I {} mv /tmp/clash/{} /usr/bin/clash"
-				os.system(str_temp)
-				os.system(str_temp2)
-			elif '.gz' in i and 'clash' in i or 'Clash' in i:
-				str_temp = "gunzip {} ".format("/tmp/clash/"+i) 
-				str_temp2 = "ls /tmp/clash | grep clash-linux | grep -v '.gz' | xargs -I {} mv /tmp/clash/{} /usr/bin/clash"
-				os.system(str_temp)
-				os.system(str_temp2)
-			elif '.zip' in i and 'clash' in i or 'Clash' in i:
-				str_temp = "unzip {} ".format("/tmp/clash/"+i) 
-				str_temp2 = "ls /tmp/clash | grep clash-linux | grep -v '.zip' | xargs -I {} mv /tmp/clash/{} /usr/bin/clash"
-				os.system(str_temp)
-				os.system(str_temp2)
+	try:
+		if f_type == "clash" : # 下载clash核心
+			clash_down = "wget {} -P /tmp/clash/".format(link)
+			os.system(clash_down)
+			for i in os.listdir('/tmp/clash/'):
+				if 'tar.gz' in i and 'clash' in i or 'Clash' in i:
+					str_temp = "tar zxf {} ".format("/tmp/clash/"+i) 
+					str_temp2 = "ls /tmp/clash | grep clash-linux | grep -v 'tar.gz' | xargs -I {} mv /tmp/clash/{} /usr/bin/clash"
+					os.system(str_temp)
+					os.system(str_temp2)
+				elif '.gz' in i and 'clash' in i or 'Clash' in i:
+					str_temp = "gunzip {} ".format("/tmp/clash/"+i) 
+					str_temp2 = "ls /tmp/clash | grep clash-linux | grep -v '.gz' | xargs -I {} mv /tmp/clash/{} /usr/bin/clash"
+					os.system(str_temp)
+					os.system(str_temp2)
+				elif '.zip' in i and 'clash' in i or 'Clash' in i:
+					str_temp = "unzip {} ".format("/tmp/clash/"+i) 
+					str_temp2 = "ls /tmp/clash | grep clash-linux | grep -v '.zip' | xargs -I {} mv /tmp/clash/{} /usr/bin/clash"
+					os.system(str_temp)
+					os.system(str_temp2)
 
-		os.chmod("/usr/bin/clash",73) # 赋权
-		shutil.rmtree('/tmp/clash') # 删除临时文件夹
-	elif f_type == "config" : # 下载订阅文件
-		config_down = "wget {} -O ~/.config/clash/config_{}.yaml".format(link,str_time) # create download link
-		os.system(config_down) #download file
-
+				os.chmod("/usr/bin/clash",73) # 赋权
+				shutil.rmtree('/tmp/clash') # 删除临时文件夹
+		elif f_type == "config" : # 下载订阅文件
+			config_down = "wget {} -O ~/.config/clash/config_{}.yaml".format(link,str_time) # create download link
+			os.system(config_down) #download file
+	except:
+		print('下载出错，请检查网络和下载链接如无问题请重试！\nDownload error, please check the network and download link. If there are no issues, please try again!')
+		exit()
 
 def update_yaml(file,k,v):
 	update_str = "sed -i 's#{}:.*#{}: {}#g' {}".format(k,k,v,file)
