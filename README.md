@@ -3,8 +3,12 @@ One click deployment of clash core in Linux
 
 获取脚本 get shell
 ```
-wget https://github.com/yoush2021/clash_for_linux_Pyshell/blob/master/clash_config.py
+git clone https://github.com/yoush2021/clash_for_linux_Pyshell.git
 ```	
+进入库
+```
+cd /clash_for_linux_Pyshell
+```
 
 赋权
 ```shell
