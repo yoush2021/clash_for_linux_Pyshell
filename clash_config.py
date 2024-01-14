@@ -61,7 +61,7 @@ def update_yaml(file,k,v):
 	os.system(update_str)
 
 def user_path():
-	path = os.popen('cd ~ | pwd ').read().strip()
+	path = os.popen('cd ~ && pwd ').read().strip()
 	return path
 
 def check_dir():
