@@ -29,6 +29,7 @@ chmod +x clash_config.py
 恢复内置clash程序下载链接
 ```
 ./clash_config.py default
+```
 
 卸载 remove
 ```
