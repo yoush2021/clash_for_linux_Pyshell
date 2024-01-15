@@ -70,7 +70,7 @@ def user_path():
 def check_dir():
 	path = user_path()
 	if not os.path.exists(path+"/.config/clash/"):
-		os.mkdir(path+"/.config/clash/")
+		os.system("mkdir -p {}/.config/clash/".format(path))
 	if not os.path.exists('/tmp/clash/'):
 		os.mkdir('/tmp/clash/')
 
